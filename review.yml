@@ -1,0 +1,99 @@
+aid: currencyapi
+name: CurrencyAPI
+review:
+  question: Does CurrencyAPI expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. CurrencyAPI's entire public surface is
+    request/response REST over HTTPS at https://api.currencyapi.com/v3 - six
+    GET endpoints (latest, historical, range, convert, currencies, status)
+    authenticated with an apikey header or query parameter. There is no
+    server-push transport (WebSocket, SSE, or webhook) documented anywhere on
+    currencyapi.com/docs, so there is nothing for an AsyncAPI document to
+    model. Real-time behavior is achieved by polling /latest, whose backing
+    rates refresh as often as every 60 seconds on Medium and higher plans.
+findings:
+  summary: |
+    CurrencyAPI does not publish a documented public WebSocket API. CurrencyAPI
+    (an Everapi product) is a foreign exchange rate and currency conversion
+    API whose documented surface is pure request/response REST over HTTPS at
+    base https://api.currencyapi.com/v3. All six documented endpoints are GET
+    requests: /latest, /historical (back to 1999), /range (time series with
+    day/hour/quarter_hour/minute accuracy), /convert, /currencies, and
+    /status. Authentication is a simple API key sent as an "apikey" HTTP
+    header (recommended) or "apikey" query parameter. No ws:// or wss://
+    endpoint, streaming subscription, SSE channel, or webhook delivery is
+    documented as of the review date. Clients needing fresh FX rates poll
+    /latest; rate freshness is plan-dependent (daily on Free, hourly on
+    Small, every 60 seconds on Medium/Large/Custom).
+  openSource: |
+    The CurrencyAPI service itself is closed/commercial SaaS, but Everapi
+    publishes open-source SDK wrappers on GitHub (github.com/everapihq) for
+    JavaScript, Python, PHP, Ruby, Java, C#, Go, and Rust, all of which wrap
+    the same REST endpoints over HTTPS - none use WebSockets.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.currencyapi.com/v3
+      documented: true
+      note: The only documented transport. Six GET endpoints with apikey header or query auth.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere on currencyapi.com/docs as of the review date.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No server-sent events or streaming channel is documented.
+    - protocol: Webhook
+      scheme: https
+      documented: false
+      note: No outbound webhook or rate-alert push delivery is documented.
+  endpointsConfirmedRest:
+    - GET https://api.currencyapi.com/v3/latest
+    - GET https://api.currencyapi.com/v3/historical
+    - GET https://api.currencyapi.com/v3/range
+    - GET https://api.currencyapi.com/v3/convert
+    - GET https://api.currencyapi.com/v3/currencies
+    - GET https://api.currencyapi.com/v3/status
+sources:
+  - url: https://currencyapi.com/docs
+    type: Documentation
+    note: Documentation index listing status, currencies, latest, historical, range, and convert endpoints. No WebSocket mentioned.
+  - url: https://currencyapi.com/docs/authentication
+    type: Documentation
+    note: apikey header (recommended) or apikey query parameter auth. HTTPS REST only.
+  - url: https://currencyapi.com/docs/latest
+    type: APIReference
+    note: GET /v3/latest with base_currency, currencies, and type parameters.
+  - url: https://currencyapi.com/docs/historical
+    type: APIReference
+    note: GET /v3/historical with required date parameter; data back to 1999.
+  - url: https://currencyapi.com/docs/range
+    type: APIReference
+    note: GET /v3/range with datetime_start/datetime_end and day/hour/quarter_hour/minute accuracy. Polling, not push.
+  - url: https://currencyapi.com/docs/convert
+    type: APIReference
+    note: GET /v3/convert with required value parameter and optional date.
+  - url: https://currencyapi.com/docs/status
+    type: APIReference
+    note: GET /v3/status returns month and grace quotas; never counted against quota.
+  - url: https://currencyapi.com/docs/rate-limit
+    type: Documentation
+    note: Monthly quotas plus per-minute limits with X-RateLimit-* headers and 429 responses. Request/response semantics throughout.
+  - url: https://github.com/everapihq
+    type: SourceCode
+    note: Official SDK wrappers (JS, Python, PHP, Ruby, Java, C#, Go, Rust) all wrap the REST endpoints; none open a WebSocket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. CurrencyAPI's public API is six
+    request/response REST GET endpoints over HTTPS, and no server-push
+    transport of any kind (WebSocket, SSE, webhook) is documented. No
+    AsyncAPI document was created because there is no asynchronous transport
+    to model; consumers who need near-real-time FX rates poll the /latest
+    endpoint, which refreshes every 60 seconds on higher plans.

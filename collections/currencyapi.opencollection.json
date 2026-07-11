@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CurrencyAPI",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "apikey",
+        "value": "{{apiKey}}",
+        "placement": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Latest Exchange Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Get latest exchange rates.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.currencyapi.com/v3/latest",
+            "params": [
+              { "name": "base_currency", "value": "USD", "type": "query", "description": "The base currency to which all results are behaving relative to. Defaults to USD." },
+              { "name": "currencies", "value": "EUR,GBP,JPY", "type": "query", "description": "Comma-separated currency codes to receive. Defaults to all available currencies." },
+              { "name": "type", "value": "fiat", "type": "query", "description": "Currency type filter: fiat, metal, or crypto. Defaults to all types." }
+            ]
+          },
+          "docs": "Returns the latest foreign exchange rates for the given base currency. Rate freshness is plan-dependent: daily (Free), hourly (Small), or every 60 seconds (Medium and above)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Historical Exchange Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Get historical exchange rates for a date.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.currencyapi.com/v3/historical",
+            "params": [
+              { "name": "date", "value": "2022-01-01", "type": "query", "description": "Required. Date to retrieve historical rates from (format 2021-12-31). Data extends back to 1999." },
+              { "name": "base_currency", "value": "USD", "type": "query", "description": "The base currency. Defaults to USD." },
+              { "name": "currencies", "value": "EUR,GBP,JPY", "type": "query", "description": "Comma-separated currency codes to receive." }
+            ]
+          },
+          "docs": "Returns end-of-day exchange rates for a specific date, with historical data reaching back to 1999."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Range Exchange Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Get time-series exchange rates for a range.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.currencyapi.com/v3/range",
+            "params": [
+              { "name": "datetime_start", "value": "2022-12-01T00:00:00Z", "type": "query", "description": "Required. ISO8601 start of the range." },
+              { "name": "datetime_end", "value": "2022-12-31T23:59:59Z", "type": "query", "description": "Required. ISO8601 end of the range." },
+              { "name": "accuracy", "value": "day", "type": "query", "description": "day (up to 366 days), hour (max 7-day range, 3 months back), quarter_hour (max 24h range, 7 days back), or minute (max 6h range, 7 days back). Defaults to day." },
+              { "name": "base_currency", "value": "USD", "type": "query", "description": "The base currency. Defaults to USD." },
+              { "name": "currencies", "value": "EUR,GBP,JPY", "type": "query", "description": "Comma-separated currency codes to receive." }
+            ]
+          },
+          "docs": "Returns exchange rate data for a datetime range in one call, with selectable accuracy. Requires the Medium plan or above."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Convert",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Convert a value between currencies.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.currencyapi.com/v3/convert",
+            "params": [
+              { "name": "value", "value": "100", "type": "query", "description": "Required. The value you want to convert." },
+              { "name": "base_currency", "value": "USD", "type": "query", "description": "The base currency of the value. Defaults to USD." },
+              { "name": "currencies", "value": "EUR", "type": "query", "description": "Comma-separated target currency codes. Defaults to all available currencies." },
+              { "name": "date", "value": "", "type": "query", "description": "Optional historical date to convert with (format 2021-12-31). Defaults to today's rates." }
+            ]
+          },
+          "docs": "Converts a monetary value from the base currency into one or more target currencies, using today's rates or a given historical date. Requires a paid plan (Small and up)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Currencies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List supported currencies.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.currencyapi.com/v3/currencies",
+            "params": [
+              { "name": "currencies", "value": "", "type": "query", "description": "Comma-separated currency codes to receive. Defaults to all." },
+              { "name": "type", "value": "", "type": "query", "description": "Currency type filter: fiat, metal, or crypto." }
+            ]
+          },
+          "docs": "Returns metadata for all supported currencies - symbol, name, native symbol, decimal digits, rounding, code, plural name, type, and associated countries."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Get API status and quota.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.currencyapi.com/v3/status"
+          },
+          "docs": "Checks whether the API is up and returns your monthly and grace quota usage. Requests to this endpoint do not count against your quota or rate limit."
+        }
+      ]
+    }
+  ]
+}

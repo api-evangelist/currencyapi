@@ -1,0 +1,86 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: CurrencyAPI
+providerId: currencyapi
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: true
+tags:
+- Foreign Exchange
+- Currency
+- Exchange Rates
+- FX
+- Rate Limiting
+- Quotas
+description: >-
+  CurrencyAPI enforces two layers of limiting - a monthly request quota that
+  varies by plan (300 on Free up to 1,700,000 on Large, custom on enterprise)
+  and a per-minute rate limit on some plans (10 requests/minute on Free; paid
+  plans advertise no per-minute limit). Exceeding either returns HTTP 429.
+  Only successful calls count against quota - failed requests, server errors,
+  and validation errors are not counted, and the /status endpoint is always
+  free of quota and rate limiting. Every response carries four headers for
+  real-time consumption monitoring.
+notes: >-
+  Grace quota (overage allowance) appears in the /status response alongside the
+  monthly quota. Monitor the X-RateLimit-* response headers and implement
+  backoff on 429s; on the Free plan pace requests to stay under 10 per minute.
+sources:
+- https://currencyapi.com/docs/rate-limit
+- https://currencyapi.com/docs/status
+- https://currencyapi.com/pricing
+responseCodes:
+  throttled: 429
+headers:
+- name: X-RateLimit-Limit-Quota-Minute
+  description: Your per-minute request ceiling.
+- name: X-RateLimit-Limit-Quota-Month
+  description: Your monthly request ceiling.
+- name: X-RateLimit-Remaining-Quota-Minute
+  description: Remaining requests this minute.
+- name: X-RateLimit-Remaining-Quota-Month
+  description: Remaining requests this month.
+limits:
+- name: Free Plan Monthly Quota
+  scope: account
+  metric: requests
+  limit: 300 per month
+  notes: Free plan monthly allowance; resets monthly.
+- name: Free Plan Minute Limit
+  scope: account
+  metric: requests
+  limit: 10 per minute
+  notes: Per-minute rate limit on the Free plan; 429 until the minute resets.
+- name: Small Plan Monthly Quota
+  scope: account
+  metric: requests
+  limit: 15000 per month
+  notes: No per-minute limit advertised on paid plans.
+- name: Medium Plan Monthly Quota
+  scope: account
+  metric: requests
+  limit: 600000 per month
+  notes: No per-minute limit advertised on paid plans.
+- name: Large Plan Monthly Quota
+  scope: account
+  metric: requests
+  limit: 1700000 per month
+  notes: Overages supported; no per-minute limit advertised.
+- name: Status Endpoint
+  scope: endpoint
+  metric: requests
+  limit: not counted
+  notes: Requests to /status never count against quota or rate limit.
+policies:
+- name: Successful Calls Only
+  description: Only successful calls count against quota - failed requests, server errors, and validation errors do not consume the monthly or minute allowance.
+- name: Quota Exceeded Behavior
+  description: Exceeding the monthly quota returns 429 until you upgrade or the month resets; exceeding the minute limit returns 429 until the minute resets.
+- name: Grace Quota
+  description: A grace (overage) quota is reported by the /status endpoint alongside the monthly quota, giving bounded headroom past the plan allowance.
+- name: Backoff Strategy
+  description: Clients should watch the X-RateLimit-Remaining-Quota-* headers and apply exponential backoff with jitter on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

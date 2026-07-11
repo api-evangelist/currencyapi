@@ -1,0 +1,153 @@
+aid: currencyapi
+url: https://raw.githubusercontent.com/api-evangelist/currencyapi/refs/heads/main/apis.yml
+name: CurrencyAPI
+kind: company
+description: CurrencyAPI (currencyapi.com, an Everapi product) is a foreign exchange
+  rate and currency conversion REST API delivering real-time and historical exchange
+  rates for 150+ fiat currencies, precious metals, and cryptocurrencies. A single
+  versioned API (base https://api.currencyapi.com/v3) covers latest rates, historical
+  rates back to 1999, time-series ranges down to minute accuracy, value conversion,
+  currency metadata, and account quota status - authenticated with a simple apikey
+  header and backed by published monthly plans that start with a free tier.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Foreign Exchange
+- Currency
+- Exchange Rates
+- FX
+- Currency Conversion
+- Financial Data
+created: '2026-07-11'
+modified: '2026-07-11'
+specificationVersion: '0.19'
+apis:
+- aid: currencyapi:currencyapi-latest-exchange-rates-api
+  name: CurrencyAPI Latest Exchange Rates API
+  tags:
+  - Foreign Exchange
+  - Exchange Rates
+  - Real-Time
+  - FX
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://currencyapi.com/docs/latest
+  baseURL: https://api.currencyapi.com/v3
+  properties:
+  - url: https://currencyapi.com/docs/latest
+    type: Documentation
+  - url: openapi/currencyapi-openapi.yml
+    type: OpenAPI
+  description: Returns the latest foreign exchange rates for any base currency
+    against all or selected quote currencies, filterable by type (fiat, metal,
+    crypto). Rates refresh from daily on the free plan down to every 60 seconds
+    on paid plans.
+- aid: currencyapi:currencyapi-historical-exchange-rates-api
+  name: CurrencyAPI Historical Exchange Rates API
+  tags:
+  - Foreign Exchange
+  - Exchange Rates
+  - Historical Data
+  - FX
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://currencyapi.com/docs/historical
+  baseURL: https://api.currencyapi.com/v3
+  properties:
+  - url: https://currencyapi.com/docs/historical
+    type: Documentation
+  - url: openapi/currencyapi-openapi.yml
+    type: OpenAPI
+  description: Retrieves end-of-day foreign exchange rates for a specific date,
+    with historical FX data reaching back to 1999, for any base currency and
+    optional currency or type filters.
+- aid: currencyapi:currencyapi-range-exchange-rates-api
+  name: CurrencyAPI Range Exchange Rates API
+  tags:
+  - Foreign Exchange
+  - Time Series
+  - Exchange Rates
+  - FX
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://currencyapi.com/docs/range
+  baseURL: https://api.currencyapi.com/v3
+  properties:
+  - url: https://currencyapi.com/docs/range
+    type: Documentation
+  - url: openapi/currencyapi-openapi.yml
+    type: OpenAPI
+  description: Returns time-series exchange rate data between a start and end
+    datetime in one call, with selectable accuracy of day (up to 366 days),
+    hour, quarter hour, or minute for charting and FX analytics.
+- aid: currencyapi:currencyapi-convert-api
+  name: CurrencyAPI Convert API
+  tags:
+  - Currency Conversion
+  - Foreign Exchange
+  - FX
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://currencyapi.com/docs/convert
+  baseURL: https://api.currencyapi.com/v3
+  properties:
+  - url: https://currencyapi.com/docs/convert
+    type: Documentation
+  - url: openapi/currencyapi-openapi.yml
+    type: OpenAPI
+  description: Converts any monetary value from a base currency into one or more
+    target currencies using either today's exchange rates or the rates of a
+    given historical date.
+- aid: currencyapi:currencyapi-currencies-api
+  name: CurrencyAPI Currencies API
+  tags:
+  - Currency
+  - Reference Data
+  - Metadata
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://currencyapi.com/docs/currencies
+  baseURL: https://api.currencyapi.com/v3
+  properties:
+  - url: https://currencyapi.com/docs/currencies
+    type: Documentation
+  - url: openapi/currencyapi-openapi.yml
+    type: OpenAPI
+  description: Lists all supported currencies with metadata - symbol, name,
+    native symbol, decimal digits, rounding, plural name, type (fiat, metal,
+    crypto), and associated countries - filterable by code or type.
+- aid: currencyapi:currencyapi-status-api
+  name: CurrencyAPI Status API
+  tags:
+  - Status
+  - Quota
+  - Account
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://currencyapi.com/docs/status
+  baseURL: https://api.currencyapi.com/v3
+  properties:
+  - url: https://currencyapi.com/docs/status
+    type: Documentation
+  - url: openapi/currencyapi-openapi.yml
+    type: OpenAPI
+  description: Programmatically checks whether the API is up and returns your
+    monthly and grace quota usage. Requests to this endpoint do not count
+    against your quota or rate limit.
+common:
+- type: GitHubOrganization
+  url: https://github.com/everapihq
+- type: LinkedIn
+  url: https://www.linkedin.com/company/everapi
+- type: Website
+  url: https://currencyapi.com
+- type: Documentation
+  url: https://currencyapi.com/docs
+- type: APIReference
+  url: https://currencyapi.com/docs/latest
+- type: Authentication
+  url: https://currencyapi.com/docs/authentication
+- type: Pricing
+  url: https://currencyapi.com/pricing
+- type: Plans
+  url: plans/currencyapi-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/currencyapi-rate-limits.yml
+- type: FinOps
+  url: finops/currencyapi-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

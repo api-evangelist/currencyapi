@@ -1,0 +1,159 @@
+{
+  "info": {
+    "name": "CurrencyAPI",
+    "description": "Foreign exchange rate and currency conversion API from currencyapi.com (an Everapi product). Base URL: https://api.currencyapi.com/v3. All endpoints are GET requests authenticated with an API key sent as an 'apikey' HTTP header (recommended) or 'apikey' query parameter. Covers latest exchange rates, historical rates back to 1999, time-series ranges, value conversion, currency metadata, and account quota status. Only successful calls count against your quota; the status endpoint is never counted.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "apikey", "type": "string" },
+      { "key": "value", "value": "{{apiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.currencyapi.com/v3", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Latest Exchange Rates",
+      "item": [
+        {
+          "name": "Get latest exchange rates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/latest?base_currency=USD&currencies=EUR,GBP,JPY",
+              "host": ["{{baseUrl}}"],
+              "path": ["latest"],
+              "query": [
+                { "key": "base_currency", "value": "USD", "description": "The base currency to which all results are behaving relative to. Defaults to USD." },
+                { "key": "currencies", "value": "EUR,GBP,JPY", "description": "Comma-separated currency codes to receive. Defaults to all available currencies." },
+                { "key": "type", "value": "fiat", "description": "Currency type filter: fiat, metal, or crypto. Defaults to all types.", "disabled": true }
+              ]
+            },
+            "description": "Returns the latest foreign exchange rates for the given base currency. Rate freshness is plan-dependent: daily (Free), hourly (Small), or every 60 seconds (Medium and above)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Historical Exchange Rates",
+      "item": [
+        {
+          "name": "Get historical exchange rates for a date",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/historical?date=2022-01-01&base_currency=USD",
+              "host": ["{{baseUrl}}"],
+              "path": ["historical"],
+              "query": [
+                { "key": "date", "value": "2022-01-01", "description": "Required. Date to retrieve historical rates from (format: 2021-12-31). Data extends back to 1999." },
+                { "key": "base_currency", "value": "USD", "description": "The base currency. Defaults to USD." },
+                { "key": "currencies", "value": "EUR,GBP,JPY", "description": "Comma-separated currency codes to receive.", "disabled": true },
+                { "key": "type", "value": "fiat", "description": "Currency type filter: fiat, metal, or crypto.", "disabled": true }
+              ]
+            },
+            "description": "Returns end-of-day exchange rates for a specific date, with historical data reaching back to 1999."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Range Exchange Rates",
+      "item": [
+        {
+          "name": "Get time-series exchange rates for a range",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/range?datetime_start=2022-12-01T00:00:00Z&datetime_end=2022-12-31T23:59:59Z&accuracy=day",
+              "host": ["{{baseUrl}}"],
+              "path": ["range"],
+              "query": [
+                { "key": "datetime_start", "value": "2022-12-01T00:00:00Z", "description": "Required. ISO8601 start of the range." },
+                { "key": "datetime_end", "value": "2022-12-31T23:59:59Z", "description": "Required. ISO8601 end of the range." },
+                { "key": "accuracy", "value": "day", "description": "day (up to 366 days), hour (max 7-day range, 3 months back), quarter_hour (max 24h range, 7 days back), or minute (max 6h range, 7 days back). Defaults to day." },
+                { "key": "base_currency", "value": "USD", "description": "The base currency. Defaults to USD.", "disabled": true },
+                { "key": "currencies", "value": "EUR,GBP,JPY", "description": "Comma-separated currency codes to receive.", "disabled": true },
+                { "key": "type", "value": "fiat", "description": "Currency type filter: fiat, metal, or crypto.", "disabled": true }
+              ]
+            },
+            "description": "Returns exchange rate data for a datetime range in one call, with selectable accuracy. Requires the Medium plan or above."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Convert",
+      "item": [
+        {
+          "name": "Convert a value between currencies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/convert?value=100&base_currency=USD&currencies=EUR",
+              "host": ["{{baseUrl}}"],
+              "path": ["convert"],
+              "query": [
+                { "key": "value", "value": "100", "description": "Required. The value you want to convert." },
+                { "key": "base_currency", "value": "USD", "description": "The base currency of the value. Defaults to USD." },
+                { "key": "currencies", "value": "EUR", "description": "Comma-separated target currency codes. Defaults to all available currencies." },
+                { "key": "date", "value": "2022-01-01", "description": "Optional historical date to convert with (format: 2021-12-31). Defaults to today's rates.", "disabled": true },
+                { "key": "type", "value": "fiat", "description": "Currency type filter: fiat, metal, or crypto.", "disabled": true }
+              ]
+            },
+            "description": "Converts a monetary value from the base currency into one or more target currencies, using today's rates or a given historical date. Requires a paid plan (Small and up)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Currencies",
+      "item": [
+        {
+          "name": "List supported currencies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/currencies",
+              "host": ["{{baseUrl}}"],
+              "path": ["currencies"],
+              "query": [
+                { "key": "currencies", "value": "EUR,USD,CAD", "description": "Comma-separated currency codes to receive. Defaults to all.", "disabled": true },
+                { "key": "type", "value": "fiat", "description": "Currency type filter: fiat, metal, or crypto.", "disabled": true }
+              ]
+            },
+            "description": "Returns metadata for all supported currencies - symbol, name, native symbol, decimal digits, rounding, code, plural name, type, and associated countries."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Status",
+      "item": [
+        {
+          "name": "Get API status and quota",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["status"]
+            },
+            "description": "Checks whether the API is up and returns your monthly and grace quota usage. Requests to this endpoint do not count against your quota or rate limit."
+          }
+        }
+      ]
+    }
+  ]
+}

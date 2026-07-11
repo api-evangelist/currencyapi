@@ -1,0 +1,95 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: CurrencyAPI
+providerId: currencyapi
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: true
+tags:
+- Foreign Exchange
+- Currency
+- Exchange Rates
+- FX
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of CurrencyAPI spend. CurrencyAPI is billed as a flat monthly (or
+  discounted annual) subscription per tier - Free $0 (300 requests), Small
+  $9.99 (15,000 requests), Medium $39.99 (600,000 requests), Large $79.99
+  (1,700,000 requests), Custom by contract - rather than pure pay-per-call.
+  The cost driver to manage is therefore plan right-sizing: matching your
+  monthly successful-request volume and required rate freshness (daily, hourly,
+  or 60-second updates) to the cheapest sufficient tier. Only successful calls
+  consume quota, and the free /status endpoint exposes month and grace quota
+  counters for programmatic spend/usage monitoring.
+notes: >-
+  Annual billing discounts each paid tier roughly 20% (Small $7.99, Medium
+  $31.99, Large $63.99 per month). Overages are supported on the Large plan;
+  a grace quota provides bounded headroom. Cache latest-rate responses and use
+  the range endpoint (one call for a whole time series) to cut request volume.
+sources:
+- https://currencyapi.com/pricing
+- https://currencyapi.com/docs/rate-limit
+- https://currencyapi.com/docs/status
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Everapi
+serviceCategory: Financial Data APIs
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly or Annual
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: CurrencyAPI
+  ServiceCategory: Financial Data APIs
+  ProviderName: CurrencyAPI
+  PublisherName: Everapi
+  InvoiceIssuerName: Everapi
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: api_requests
+  description: Successful API requests per month, counted against the plan quota (300 to 1,700,000 by tier).
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+  - api_key
+  - endpoint
+- name: grace_quota_usage
+  description: Overage requests consumed from the grace quota reported by the /status endpoint.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+- name: plan_subscription
+  description: Flat monthly or annual subscription fee for the selected tier.
+  unit: months
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+principles:
+- name: Visibility
+  description: Poll the free /status endpoint and read the X-RateLimit-* response headers to track month and grace quota consumption in near real time.
+- name: Allocation
+  description: Use separate API keys (2 on Medium, 5 on Large) per application or team so request volume maps to internal cost centers.
+- name: Optimization
+  description: Cache latest rates for your refresh interval, request only needed currencies via the currencies parameter, and use the range endpoint to fetch a whole time series in one call instead of many historical calls.
+- name: Accountability
+  description: Review monthly usage against the plan quota and right-size the tier - upgrade before hitting 429s or downgrade when sustained usage sits well below the allowance.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,162 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: CurrencyAPI
+providerId: currencyapi
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: true
+tags:
+- Foreign Exchange
+- Currency
+- Exchange Rates
+- FX
+- Plans
+description: >-
+  CurrencyAPI publishes five monthly plans metered on successful API requests
+  per month. A free-forever tier (300 requests/month, daily rate updates,
+  10 requests/minute) is followed by Small ($9.99/mo), Medium ($39.99/mo), and
+  Large ($79.99/mo) tiers that raise the monthly request quota, refresh rates
+  more frequently (hourly, then every 60 seconds), remove the per-minute rate
+  limit, and add features like commercial use, the range endpoint, sandbox API
+  keys, team management, IP/URL whitelisting, and an SLA. Annual billing
+  discounts each paid tier (Small $7.99, Medium $31.99, Large $63.99 per month).
+  A Custom/enterprise plan offers negotiated volumes and SLAs. Only successful
+  calls count against quota, and the status endpoint is never counted.
+notes: >-
+  Prices verified on currencyapi.com/pricing as of 2026-07-11. The convert
+  endpoint requires a paid plan (Small and up); the range endpoint requires
+  Medium and up. Free plan is limited to 10 requests per minute; paid plans
+  advertise no per-minute limit.
+sources:
+- https://currencyapi.com/pricing
+- https://currencyapi.com/docs/rate-limit
+- https://currencyapi.com/docs/status
+plans:
+- id: currencyapi-free
+  name: Free
+  type: free
+  description: >-
+    Free-forever starter tier - 300 requests per month, one API key, daily
+    exchange rate updates, and a 10 requests/minute rate limit. Latest and
+    historical rates over HTTPS; no commercial use.
+  entries:
+  - label: API Requests
+    name: free_requests
+    type: usage
+    metric: requests
+    limit: 300
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0/month
+    userMultiplied: false
+  elements:
+  - name: 1 API Key
+  - name: Daily Rate Updates
+  - name: Latest Rates
+  - name: Historical Rates
+  - name: HTTPS Encryption
+- id: currencyapi-small
+  name: Small
+  type: paid
+  description: >-
+    Hobby-project tier - 15,000 requests per month, one API key, hourly rate
+    updates, no per-minute rate limit, commercial use, convert endpoint, audit
+    trail, and email support. $9.99/month, or $7.99/month billed annually.
+  entries:
+  - label: API Requests
+    name: small_requests
+    type: usage
+    metric: requests
+    limit: 15000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $9.99/month ($7.99/month billed annually)
+    userMultiplied: false
+  elements:
+  - name: 1 API Key
+  - name: Hourly Rate Updates
+  - name: Commercial Use
+  - name: Convert Endpoint
+  - name: Audit Trail
+  - name: Email Support
+- id: currencyapi-medium
+  name: Medium
+  type: paid
+  description: >-
+    Most popular tier - 600,000 requests per month, two API keys, 60-second
+    rate updates, no per-minute rate limit, range endpoint, sandbox API keys,
+    team management, and email support. $39.99/month, or $31.99/month billed
+    annually.
+  entries:
+  - label: API Requests
+    name: medium_requests
+    type: usage
+    metric: requests
+    limit: 600000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $39.99/month ($31.99/month billed annually)
+    userMultiplied: false
+  elements:
+  - name: 2 API Keys
+  - name: 60-Second Rate Updates
+  - name: Range Endpoint
+  - name: Sandbox API Keys
+  - name: Team Management
+  - name: Commercial Use
+  - name: Email Support
+- id: currencyapi-large
+  name: Large
+  type: paid
+  description: >-
+    High-volume tier - 1,700,000 requests per month, five API keys, 60-second
+    rate updates, IP whitelisting/blacklisting, URL whitelisting, overages
+    support, and an SLA. $79.99/month, or $63.99/month billed annually.
+  entries:
+  - label: API Requests
+    name: large_requests
+    type: usage
+    metric: requests
+    limit: 1700000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $79.99/month ($63.99/month billed annually)
+    userMultiplied: false
+  elements:
+  - name: 5 API Keys
+  - name: 60-Second Rate Updates
+  - name: IP Whitelisting and Blacklisting
+  - name: URL Whitelisting
+  - name: Overages Support
+  - name: SLA
+- id: currencyapi-custom
+  name: Custom
+  type: enterprise
+  description: >-
+    Enterprise plan with custom monthly request volumes, custom API key counts,
+    60-second rate updates, tailored support, and custom SLA options. Contact
+    CurrencyAPI for pricing.
+  entries:
+  - label: Enterprise Agreement
+    name: custom
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Request Volume
+  - name: Custom API Keys
+  - name: Tailored Support
+  - name: Custom SLA
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
