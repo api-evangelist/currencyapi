@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/currencyapi-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: apiKeyHeader
+  type: apiKey
+  in: header
+  parameter: apikey
+  description: API key passed as an HTTP header (recommended).
+  sources:
+  - openapi/currencyapi-openapi.yml
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameter: apikey
+  description: API key passed as a query parameter (may expose the key in access logs).
+  sources:
+  - openapi/currencyapi-openapi.yml
