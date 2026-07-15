@@ -128,6 +128,8 @@ apis:
     monthly and grace quota usage. Requests to this endpoint do not count
     against your quota or rate limit.
 common:
+- type: AgenticAccess
+  url: agentic-access/currencyapi-agentic-access.yml
 - type: DomainSecurity
   url: security/currencyapi-domain-security.yml
 - type: Authentication
