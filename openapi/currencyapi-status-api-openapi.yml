@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: Currency Convert Status API
+  description: CurrencyAPI (currencyapi.com, an Everapi product) is a foreign exchange rate and currency conversion REST API. A single versioned surface at https://api.currencyapi.com/v3 provides the latest exchange rates, historical end-of-day rates back to 1999, time-series ranges with day/hour/quarter-hour/ minute accuracy, value conversion, currency metadata, and account quota status. All endpoints are GET requests authenticated with an API key passed either as an "apikey" HTTP header (recommended) or an "apikey" query parameter. Only successful calls count against your quota; the status endpoint is never counted.
+  version: '3.0'
+  contact:
+    name: CurrencyAPI
+    url: https://currencyapi.com
+  termsOfService: https://currencyapi.com/terms
+servers:
+- url: https://api.currencyapi.com/v3
+  description: Production
+security:
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Status
+  description: API health and account quota status.
+paths:
+  /status:
+    get:
+      operationId: getStatus
+      tags:
+      - Status
+      summary: API status and quota
+      description: Checks whether the API is up and returns your monthly and grace quota usage. Requests to this endpoint do not count against your quota or rate limit.
+      responses:
+        '200':
+          description: Account quota status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+              example:
+                account_id: 313373133731337
+                quotas:
+                  month:
+                    total: 300
+                    used: 72
+                    remaining: 229
+                  grace:
+                    total: 0
+                    used: 0
+                    remaining: 0
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    StatusResponse:
+      type: object
+      properties:
+        account_id:
+          type: integer
+          format: int64
+        quotas:
+          type: object
+          properties:
+            month:
+              $ref: '#/components/schemas/Quota'
+            grace:
+              $ref: '#/components/schemas/Quota'
+    Quota:
+      type: object
+      properties:
+        total:
+          type: integer
+        used:
+          type: integer
+        remaining:
+          type: integer
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: apikey
+      description: API key passed as an HTTP header (recommended).
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apikey
+      description: API key passed as a query parameter (may expose the key in access logs).

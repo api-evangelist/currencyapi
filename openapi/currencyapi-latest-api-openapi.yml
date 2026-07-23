@@ -1,0 +1,150 @@
+openapi: 3.0.3
+info:
+  title: Currency Convert Latest API
+  description: CurrencyAPI (currencyapi.com, an Everapi product) is a foreign exchange rate and currency conversion REST API. A single versioned surface at https://api.currencyapi.com/v3 provides the latest exchange rates, historical end-of-day rates back to 1999, time-series ranges with day/hour/quarter-hour/ minute accuracy, value conversion, currency metadata, and account quota status. All endpoints are GET requests authenticated with an API key passed either as an "apikey" HTTP header (recommended) or an "apikey" query parameter. Only successful calls count against your quota; the status endpoint is never counted.
+  version: '3.0'
+  contact:
+    name: CurrencyAPI
+    url: https://currencyapi.com
+  termsOfService: https://currencyapi.com/terms
+servers:
+- url: https://api.currencyapi.com/v3
+  description: Production
+security:
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Latest
+  description: Latest foreign exchange rates.
+paths:
+  /latest:
+    get:
+      operationId: getLatestExchangeRates
+      tags:
+      - Latest
+      summary: Latest exchange rates
+      description: Returns the latest exchange rates for the given base currency against all available currencies or a selected list. Rate freshness depends on plan - daily on Free, hourly on Small, every 60 seconds on Medium and above.
+      parameters:
+      - $ref: '#/components/parameters/baseCurrency'
+      - $ref: '#/components/parameters/currencies'
+      - $ref: '#/components/parameters/type'
+      responses:
+        '200':
+          description: Latest exchange rates keyed by currency code.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatesResponse'
+              example:
+                meta:
+                  last_updated_at: '2023-06-23T10:15:59Z'
+                data:
+                  AED:
+                    code: AED
+                    value: 3.67306
+                  EUR:
+                    code: EUR
+                    value: 0.91234
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  schemas:
+    Rate:
+      type: object
+      properties:
+        code:
+          type: string
+          description: ISO currency code.
+          example: EUR
+        value:
+          type: number
+          description: Exchange rate value relative to the base currency.
+          example: 0.91234
+    RatesResponse:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            last_updated_at:
+              type: string
+              format: date-time
+        data:
+          type: object
+          description: Exchange rate objects keyed by currency code.
+          additionalProperties:
+            $ref: '#/components/schemas/Rate'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+  responses:
+    RateLimited:
+      description: Monthly quota or per-minute rate limit exceeded. Inspect the X-RateLimit-Limit-Quota-Minute, X-RateLimit-Limit-Quota-Month, X-RateLimit-Remaining-Quota-Minute, and X-RateLimit-Remaining-Quota-Month response headers to monitor consumption.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: Validation error - incorrect or missing parameters. Failed requests do not count against your quota.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    currencies:
+      name: currencies
+      in: query
+      required: false
+      description: A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies.
+      schema:
+        type: string
+        example: EUR,USD,CAD
+    type:
+      name: type
+      in: query
+      required: false
+      description: The type of currency you want to get. Defaults to all types.
+      schema:
+        type: string
+        enum:
+        - fiat
+        - metal
+        - crypto
+    baseCurrency:
+      name: base_currency
+      in: query
+      required: false
+      description: The base currency to which all results are behaving relative to. Defaults to USD.
+      schema:
+        type: string
+        default: USD
+        example: USD
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: apikey
+      description: API key passed as an HTTP header (recommended).
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apikey
+      description: API key passed as a query parameter (may expose the key in access logs).
