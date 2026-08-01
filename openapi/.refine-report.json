@@ -1,0 +1,24 @@
+{
+  "provider": "currencyapi",
+  "sources": [
+    "currencyapi-convert-api-openapi.yml",
+    "currencyapi-currencies-api-openapi.yml",
+    "currencyapi-historical-api-openapi.yml",
+    "currencyapi-latest-api-openapi.yml",
+    "currencyapi-range-api-openapi.yml",
+    "currencyapi-status-api-openapi.yml"
+  ],
+  "outputs": [
+    "currencyapi-convert-api-openapi.yml",
+    "currencyapi-currencies-api-openapi.yml",
+    "currencyapi-historical-api-openapi.yml",
+    "currencyapi-latest-api-openapi.yml",
+    "currencyapi-range-api-openapi.yml",
+    "currencyapi-status-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
