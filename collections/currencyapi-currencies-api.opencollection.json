@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Currency Convert Currencies API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Currencies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List supported currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.currencyapi.com/v3/currencies",
+            "params": [
+              {
+                "name": "currencies",
+                "value": "",
+                "type": "query",
+                "description": "A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of currency you want to get. Defaults to all types."
+              }
+            ]
+          },
+          "docs": "Returns metadata for all supported currencies - symbol, name, native symbol, decimal digits, rounding, code, plural name, type, and associated countries - optionally filtered by code or type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

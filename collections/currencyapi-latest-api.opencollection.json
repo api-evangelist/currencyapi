@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Currency Convert Latest API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Latest",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Latest exchange rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.currencyapi.com/v3/latest",
+            "params": [
+              {
+                "name": "base_currency",
+                "value": "",
+                "type": "query",
+                "description": "The base currency to which all results are behaving relative to. Defaults to USD."
+              },
+              {
+                "name": "currencies",
+                "value": "",
+                "type": "query",
+                "description": "A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of currency you want to get. Defaults to all types."
+              }
+            ]
+          },
+          "docs": "Returns the latest exchange rates for the given base currency against all available currencies or a selected list. Rate freshness depends on plan - daily on Free, hourly on Small, every 60 seconds on Medium and above."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

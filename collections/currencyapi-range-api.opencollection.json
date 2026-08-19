@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Currency Convert Range API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Range",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Range (time-series) exchange rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.currencyapi.com/v3/range",
+            "params": [
+              {
+                "name": "datetime_start",
+                "value": "",
+                "type": "query",
+                "description": "ISO8601 datetime for the start of the range (format: 2022-12-01T00:00:00Z)."
+              },
+              {
+                "name": "datetime_end",
+                "value": "",
+                "type": "query",
+                "description": "ISO8601 datetime for the end of the range (format: 2022-12-31T23:59:59Z)."
+              },
+              {
+                "name": "accuracy",
+                "value": "",
+                "type": "query",
+                "description": "Accuracy of the time-series data points."
+              },
+              {
+                "name": "base_currency",
+                "value": "",
+                "type": "query",
+                "description": "The base currency to which all results are behaving relative to. Defaults to USD."
+              },
+              {
+                "name": "currencies",
+                "value": "",
+                "type": "query",
+                "description": "A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of currency you want to get. Defaults to all types."
+              }
+            ]
+          },
+          "docs": "Returns exchange rate data for a datetime range in a single call. Accuracy constraints - day covers up to 366 days of history; hour allows a maximum 7-day range up to 3 months back; quarter_hour allows a maximum 24-hour range up to 7 days back; minute allows a maximum 6-hour range up to 7 days back."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,170 @@
+{
+  "item": [
+    {
+      "id": "fb2b97b3-469a-44ac-aab8-2c45d62011a0",
+      "name": "Status",
+      "description": {
+        "content": "API health and account quota status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "284da95b-e895-4ee6-97f4-d5bb71897e16",
+          "name": "API status and quota",
+          "request": {
+            "name": "API status and quota",
+            "description": {
+              "content": "Checks whether the API is up and returns your monthly and grace quota usage. Requests to this endpoint do not count against your quota or rate limit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84947297-6d48-420c-a4d8-245acff706d5",
+              "name": "Account quota status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"account_id\": 313373133731337,\n  \"quotas\": {\n    \"month\": {\n      \"total\": 300,\n      \"used\": 72,\n      \"remaining\": 229\n    },\n    \"grace\": {\n      \"total\": 0,\n      \"used\": 0,\n      \"remaining\": 0\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "776bb631-6fc1-462e-865d-3ea77a5ea6a6",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_2\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.currencyapi.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "eda888d3-ea02-4ea7-a0a0-bbfc3f5843cc",
+    "name": "Currency Convert Status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CurrencyAPI (currencyapi.com, an Everapi product) is a foreign exchange rate and currency conversion REST API. A single versioned surface at https://api.currencyapi.com/v3 provides the latest exchange rates, historical end-of-day rates back to 1999, time-series ranges with day/hour/quarter-hour/ minute accuracy, value conversion, currency metadata, and account quota status. All endpoints are GET requests authenticated with an API key passed either as an \"apikey\" HTTP header (recommended) or an \"apikey\" query parameter. Only successful calls count against your quota; the status endpoint is never counted.\n\nContact Support:\n Name: CurrencyAPI",
+      "type": "text/plain"
+    }
+  }
+}

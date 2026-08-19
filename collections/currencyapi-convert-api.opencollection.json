@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Currency Convert API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Convert",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Convert a value between currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.currencyapi.com/v3/convert",
+            "params": [
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "The value you want to convert."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Optional historical date to convert with (format: 2021-12-31). Defaults to the latest rates."
+              },
+              {
+                "name": "base_currency",
+                "value": "",
+                "type": "query",
+                "description": "The base currency to which all results are behaving relative to. Defaults to USD."
+              },
+              {
+                "name": "currencies",
+                "value": "",
+                "type": "query",
+                "description": "A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of currency you want to get. Defaults to all types."
+              }
+            ]
+          },
+          "docs": "Converts a monetary value from the base currency into one or more target currencies, using today's rates or the rates of a given historical date."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

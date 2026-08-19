@@ -1,0 +1,393 @@
+{
+  "item": [
+    {
+      "id": "c8fc2f19-d186-49b1-a3ab-4e3ed4c5a7be",
+      "name": "Range",
+      "description": {
+        "content": "Time-series exchange rates for a datetime range.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0434fdc4-0727-42b5-85ef-f724f5e407e3",
+          "name": "Range (time-series) exchange rates",
+          "request": {
+            "name": "Range (time-series) exchange rates",
+            "description": {
+              "content": "Returns exchange rate data for a datetime range in a single call. Accuracy constraints - day covers up to 366 days of history; hour allows a maximum 7-day range up to 3 months back; quarter_hour allows a maximum 24-hour range up to 7 days back; minute allows a maximum 6-hour range up to 7 days back.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "datetime_start",
+                  "value": "<dateTime>",
+                  "description": "(Required) ISO8601 datetime for the start of the range (format: 2022-12-01T00:00:00Z)."
+                },
+                {
+                  "disabled": false,
+                  "key": "datetime_end",
+                  "value": "<dateTime>",
+                  "description": "(Required) ISO8601 datetime for the end of the range (format: 2022-12-31T23:59:59Z)."
+                },
+                {
+                  "disabled": false,
+                  "key": "accuracy",
+                  "value": "day",
+                  "description": "Accuracy of the time-series data points."
+                },
+                {
+                  "disabled": false,
+                  "key": "base_currency",
+                  "value": "USD",
+                  "description": "The base currency to which all results are behaving relative to. Defaults to USD."
+                },
+                {
+                  "disabled": false,
+                  "key": "currencies",
+                  "value": "<string>",
+                  "description": "A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of currency you want to get. Defaults to all types."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e702614-0355-475a-a3dc-e322c5c26c82",
+              "name": "Time-series exchange rate data points.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datetime_start",
+                      "value": "2022-12-01T00:00:00Z"
+                    },
+                    {
+                      "key": "datetime_end",
+                      "value": "2022-12-31T23:59:59Z"
+                    },
+                    {
+                      "key": "accuracy",
+                      "value": "day"
+                    },
+                    {
+                      "key": "base_currency",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "currencies",
+                      "value": "EUR,USD,CAD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"datetime\": \"2022-01-01T23:59:59Z\",\n      \"currencies\": {\n        \"AED\": {\n          \"code\": \"AED\",\n          \"value\": 3.67306\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94c9a505-5e32-46b7-bb5b-66ed151fada0",
+              "name": "Invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datetime_start",
+                      "value": "2022-12-01T00:00:00Z"
+                    },
+                    {
+                      "key": "datetime_end",
+                      "value": "2022-12-31T23:59:59Z"
+                    },
+                    {
+                      "key": "accuracy",
+                      "value": "day"
+                    },
+                    {
+                      "key": "base_currency",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "currencies",
+                      "value": "EUR,USD,CAD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "feb2ecf4-4fe8-47fd-b941-8f84d26614c7",
+              "name": "Validation error - incorrect or missing parameters. Failed requests do not count against your quota.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datetime_start",
+                      "value": "2022-12-01T00:00:00Z"
+                    },
+                    {
+                      "key": "datetime_end",
+                      "value": "2022-12-31T23:59:59Z"
+                    },
+                    {
+                      "key": "accuracy",
+                      "value": "day"
+                    },
+                    {
+                      "key": "base_currency",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "currencies",
+                      "value": "EUR,USD,CAD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3efafba2-e6ca-4fa4-bf0e-1602b3aa923c",
+              "name": "Monthly quota or per-minute rate limit exceeded. Inspect the X-RateLimit-Limit-Quota-Minute, X-RateLimit-Limit-Quota-Month, X-RateLimit-Remaining-Quota-Minute, and X-RateLimit-Remaining-Quota-Month response headers to monitor consumption.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "datetime_start",
+                      "value": "2022-12-01T00:00:00Z"
+                    },
+                    {
+                      "key": "datetime_end",
+                      "value": "2022-12-31T23:59:59Z"
+                    },
+                    {
+                      "key": "accuracy",
+                      "value": "day"
+                    },
+                    {
+                      "key": "base_currency",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "currencies",
+                      "value": "EUR,USD,CAD"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.currencyapi.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b53243d0-e4b7-4314-9496-5cac470f57bd",
+    "name": "Currency Convert Range API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CurrencyAPI (currencyapi.com, an Everapi product) is a foreign exchange rate and currency conversion REST API. A single versioned surface at https://api.currencyapi.com/v3 provides the latest exchange rates, historical end-of-day rates back to 1999, time-series ranges with day/hour/quarter-hour/ minute accuracy, value conversion, currency metadata, and account quota status. All endpoints are GET requests authenticated with an API key passed either as an \"apikey\" HTTP header (recommended) or an \"apikey\" query parameter. Only successful calls count against your quota; the status endpoint is never counted.\n\nContact Support:\n Name: CurrencyAPI",
+      "type": "text/plain"
+    }
+  }
+}

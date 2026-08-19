@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Currency Convert Historical API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Historical",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Historical exchange rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.currencyapi.com/v3/historical",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Date to retrieve historical rates from (format: 2021-12-31)."
+              },
+              {
+                "name": "base_currency",
+                "value": "",
+                "type": "query",
+                "description": "The base currency to which all results are behaving relative to. Defaults to USD."
+              },
+              {
+                "name": "currencies",
+                "value": "",
+                "type": "query",
+                "description": "A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of currency you want to get. Defaults to all types."
+              }
+            ]
+          },
+          "docs": "Returns end-of-day exchange rates for a specific date. Historical data extends back to 1999."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
