@@ -62,6 +62,8 @@ apis:
   humanURL: https://currencyapi.com/docs/latest
   baseURL: https://api.currencyapi.com/v3
   tags:
+  - Currency
+  tags_raw:
   - Currencies
   properties:
   - type: OpenAPI
