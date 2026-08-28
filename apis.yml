@@ -9,6 +9,18 @@ description: CurrencyAPI (currencyapi.com, an Everapi product) is a foreign exch
   rates back to 1999, time-series ranges down to minute accuracy, value conversion,
   currency metadata, and account quota status - authenticated with a simple apikey
   header and backed by published monthly plans that start with a free tier.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
