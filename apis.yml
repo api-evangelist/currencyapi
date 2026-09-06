@@ -182,6 +182,8 @@ apis:
   - type: Documentation
     url: https://currencyapi.com/docs/status
 common:
+- type: PublicAPIsListing
+  url: https://github.com/public-apis/public-apis
 - type: AgenticAccess
   url: agentic-access/currencyapi-agentic-access.yml
 - type: DomainSecurity
