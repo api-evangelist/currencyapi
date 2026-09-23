@@ -1,12 +1,7 @@
 {
   "provider": "currencyapi",
   "sources": [
-    "currencyapi-convert-api-openapi.yml",
-    "currencyapi-currencies-api-openapi.yml",
-    "currencyapi-historical-api-openapi.yml",
-    "currencyapi-latest-api-openapi.yml",
-    "currencyapi-range-api-openapi.yml",
-    "currencyapi-status-api-openapi.yml"
+    "_original/currencyapi-openapi.yml"
   ],
   "outputs": [
     "currencyapi-convert-api-openapi.yml",
@@ -20,13 +15,16 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "currencyapi-convert-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "currencyapi-currencies-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "currencyapi-historical-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "currencyapi-latest-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "currencyapi-range-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "currencyapi-status-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "currencyapi-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "currencyapi-convert-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "currencyapi-currencies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "currencyapi-historical-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "currencyapi-latest-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "currencyapi-range-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "currencyapi-status-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
