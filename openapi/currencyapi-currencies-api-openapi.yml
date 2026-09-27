@@ -59,26 +59,25 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  parameters:
-    currencies:
-      name: currencies
-      in: query
-      required: false
-      description: A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies.
-      schema:
-        type: string
-        example: EUR,USD,CAD
-    type:
-      name: type
-      in: query
-      required: false
-      description: The type of currency you want to get. Defaults to all types.
-      schema:
-        type: string
-        enum:
-        - fiat
-        - metal
-        - crypto
+  responses:
+    RateLimited:
+      description: Monthly quota or per-minute rate limit exceeded. Inspect the X-RateLimit-Limit-Quota-Minute, X-RateLimit-Limit-Quota-Month, X-RateLimit-Remaining-Quota-Minute, and X-RateLimit-Remaining-Quota-Month response headers to monitor consumption.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: Validation error - incorrect or missing parameters. Failed requests do not count against your quota.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Currency:
       type: object
@@ -118,25 +117,26 @@ components:
             type: array
             items:
               type: string
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: Validation error - incorrect or missing parameters. Failed requests do not count against your quota.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Monthly quota or per-minute rate limit exceeded. Inspect the X-RateLimit-Limit-Quota-Minute, X-RateLimit-Limit-Quota-Month, X-RateLimit-Remaining-Quota-Minute, and X-RateLimit-Remaining-Quota-Month response headers to monitor consumption.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    currencies:
+      name: currencies
+      in: query
+      required: false
+      description: A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies.
+      schema:
+        type: string
+        example: EUR,USD,CAD
+    type:
+      name: type
+      in: query
+      required: false
+      description: The type of currency you want to get. Defaults to all types.
+      schema:
+        type: string
+        enum:
+        - fiat
+        - metal
+        - crypto
   securitySchemes:
     apiKeyHeader:
       type: apiKey
