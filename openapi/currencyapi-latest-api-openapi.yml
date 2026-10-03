@@ -52,55 +52,18 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    RateLimited:
-      description: Monthly quota or per-minute rate limit exceeded. Inspect the X-RateLimit-Limit-Quota-Minute, X-RateLimit-Limit-Quota-Month, X-RateLimit-Remaining-Quota-Minute, and X-RateLimit-Remaining-Quota-Month response headers to monitor consumption.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: Validation error - incorrect or missing parameters. Failed requests do not count against your quota.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    baseCurrency:
-      name: base_currency
-      in: query
-      required: false
-      description: The base currency to which all results are behaving relative to. Defaults to USD.
-      schema:
-        type: string
-        default: USD
-        example: USD
-    currencies:
-      name: currencies
-      in: query
-      required: false
-      description: A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies.
-      schema:
-        type: string
-        example: EUR,USD,CAD
-    type:
-      name: type
-      in: query
-      required: false
-      description: The type of currency you want to get. Defaults to all types.
-      schema:
-        type: string
-        enum:
-        - fiat
-        - metal
-        - crypto
   schemas:
+    Rate:
+      type: object
+      properties:
+        code:
+          type: string
+          description: ISO currency code.
+          example: EUR
+        value:
+          type: number
+          description: Exchange rate value relative to the base currency.
+          example: 0.91234
     RatesResponse:
       type: object
       properties:
@@ -115,17 +78,6 @@ components:
           description: Exchange rate objects keyed by currency code.
           additionalProperties:
             $ref: '#/components/schemas/Rate'
-    Rate:
-      type: object
-      properties:
-        code:
-          type: string
-          description: ISO currency code.
-          example: EUR
-        value:
-          type: number
-          description: Exchange rate value relative to the base currency.
-          example: 0.91234
     Error:
       type: object
       properties:
@@ -137,6 +89,54 @@ components:
             type: array
             items:
               type: string
+  parameters:
+    type:
+      name: type
+      in: query
+      required: false
+      description: The type of currency you want to get. Defaults to all types.
+      schema:
+        type: string
+        enum:
+        - fiat
+        - metal
+        - crypto
+    currencies:
+      name: currencies
+      in: query
+      required: false
+      description: A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies.
+      schema:
+        type: string
+        example: EUR,USD,CAD
+    baseCurrency:
+      name: base_currency
+      in: query
+      required: false
+      description: The base currency to which all results are behaving relative to. Defaults to USD.
+      schema:
+        type: string
+        default: USD
+        example: USD
+  responses:
+    RateLimited:
+      description: Monthly quota or per-minute rate limit exceeded. Inspect the X-RateLimit-Limit-Quota-Minute, X-RateLimit-Limit-Quota-Month, X-RateLimit-Remaining-Quota-Minute, and X-RateLimit-Remaining-Quota-Month response headers to monitor consumption.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: Validation error - incorrect or missing parameters. Failed requests do not count against your quota.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyHeader:
       type: apiKey
