@@ -59,35 +59,15 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  parameters:
-    type:
-      name: type
-      in: query
-      required: false
-      description: The type of currency you want to get. Defaults to all types.
-      schema:
-        type: string
-        enum:
-        - fiat
-        - metal
-        - crypto
-    currencies:
-      name: currencies
-      in: query
-      required: false
-      description: A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies.
-      schema:
-        type: string
-        example: EUR,USD,CAD
   responses:
-    RateLimited:
-      description: Monthly quota or per-minute rate limit exceeded. Inspect the X-RateLimit-Limit-Quota-Minute, X-RateLimit-Limit-Quota-Month, X-RateLimit-Remaining-Quota-Minute, and X-RateLimit-Remaining-Quota-Month response headers to monitor consumption.
+    Unauthorized:
+      description: Invalid or missing API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid or missing API key.
+    RateLimited:
+      description: Monthly quota or per-minute rate limit exceeded. Inspect the X-RateLimit-Limit-Quota-Minute, X-RateLimit-Limit-Quota-Month, X-RateLimit-Remaining-Quota-Minute, and X-RateLimit-Remaining-Quota-Month response headers to monitor consumption.
       content:
         application/json:
           schema:
@@ -99,6 +79,17 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
     Currency:
       type: object
       properties:
@@ -126,17 +117,26 @@ components:
           type: array
           items:
             type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
+  parameters:
+    currencies:
+      name: currencies
+      in: query
+      required: false
+      description: A list of comma-separated currency codes you want to receive (e.g. EUR,USD,CAD). Defaults to all available currencies.
+      schema:
+        type: string
+        example: EUR,USD,CAD
+    type:
+      name: type
+      in: query
+      required: false
+      description: The type of currency you want to get. Defaults to all types.
+      schema:
+        type: string
+        enum:
+        - fiat
+        - metal
+        - crypto
   securitySchemes:
     apiKeyHeader:
       type: apiKey

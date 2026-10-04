@@ -53,15 +53,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Quota:
-      type: object
-      properties:
-        total:
-          type: integer
-        used:
-          type: integer
-        remaining:
-          type: integer
     Error:
       type: object
       properties:
@@ -86,6 +77,15 @@ components:
               $ref: '#/components/schemas/Quota'
             grace:
               $ref: '#/components/schemas/Quota'
+    Quota:
+      type: object
+      properties:
+        total:
+          type: integer
+        used:
+          type: integer
+        remaining:
+          type: integer
   securitySchemes:
     apiKeyHeader:
       type: apiKey
