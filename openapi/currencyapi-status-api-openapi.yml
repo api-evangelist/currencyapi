@@ -64,6 +64,15 @@ components:
             type: array
             items:
               type: string
+    Quota:
+      type: object
+      properties:
+        total:
+          type: integer
+        used:
+          type: integer
+        remaining:
+          type: integer
     StatusResponse:
       type: object
       properties:
@@ -77,15 +86,6 @@ components:
               $ref: '#/components/schemas/Quota'
             grace:
               $ref: '#/components/schemas/Quota'
-    Quota:
-      type: object
-      properties:
-        total:
-          type: integer
-        used:
-          type: integer
-        remaining:
-          type: integer
   securitySchemes:
     apiKeyHeader:
       type: apiKey
