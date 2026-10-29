@@ -1,4 +1,4 @@
-# CurrencyAPI (currencyapi)
+# CurrencyAPI
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,165 +64,129 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-CurrencyAPI (currencyapi.com, an Everapi product) is a foreign exchange rate and currency conversion REST API delivering real-time and historical exchange rates for fiat currencies, precious metals, and cryptocurrencies. A single versioned API (base `https://api.currencyapi.com/v3`) covers latest rates, historical rates back to 1999, time-series ranges down to minute accuracy, value conversion, currency metadata, and account quota status.
+CurrencyAPI (currencyapi.com, an Everapi product) is a foreign exchange rate and currency conversion REST API delivering real-time and historical exchange rates for 150+ fiat currencies, precious metals, and cryptocurrencies. A single versioned API (base https://api.currencyapi.com/v3) covers latest rates, historical rates back to 1999, time-series ranges down to minute accuracy, value conversion, currency metadata, and account quota status - authenticated with a simple apikey header and backed by published monthly plans that start with a free tier.
 
-The API is fully documented and publicly accessible: sign up on currencyapi.com, get an API key, and authenticate by sending it as an `apikey` HTTP header (recommended) or `apikey` query parameter. A free-forever plan includes 300 requests per month with daily rate updates and a 10 requests/minute limit; paid plans ($9.99 to $79.99 per month, plus a custom enterprise tier) raise the monthly quota to 15,000-1,700,000+ requests, refresh rates as often as every 60 seconds, and unlock commercial use, the convert endpoint (Small and up), and the range endpoint (Medium and up). Only successful calls count against your quota. There is no public WebSocket or streaming API - all access is request/response REST over HTTPS.
+**Areas:** Foreign Exchange · Currency · Exchange Rates · Currency Conversion · Financial Data
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/currencyapi/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/currencyapi/refs/heads/main/apis.yml)
+## CurrencyAPI on APIs.io
 
-## Tags
+Everything profiled for CurrencyAPI is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/currencyapi/](https://apis.io/providers/currencyapi/)** — or go straight to one of the APIs or properties below.
 
-- Foreign Exchange
-- Currency
-- Exchange Rates
-- FX
-- Currency Conversion
-- Financial Data
+### APIs (6)
 
-## Timestamps
+- [CurrencyAPI Convert API](https://apis.io/apis/currencyapi/currencyapi-convert-api/) — Convert a value between currencies.
+- [CurrencyAPI Currencies API](https://apis.io/apis/currencyapi/currencyapi-currencies-api/) — Supported currency metadata.
+- [CurrencyAPI Historical API](https://apis.io/apis/currencyapi/currencyapi-historical-api/) — End-of-day historical exchange rates back to 1999.
+- [CurrencyAPI Latest API](https://apis.io/apis/currencyapi/currencyapi-latest-api/) — Latest foreign exchange rates.
+- [CurrencyAPI Range API](https://apis.io/apis/currencyapi/currencyapi-range-api/) — Time-series exchange rates for a datetime range.
+- [CurrencyAPI Status API](https://apis.io/apis/currencyapi/currencyapi-status-api/) — API health and account quota status.
 
-- **Created:** 2026-07-11
-- **Modified:** 2026-07-11
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### CurrencyAPI Latest Exchange Rates API
+#### Agentic access (1)
 
-Returns the latest foreign exchange rates for any base currency against all or selected quote currencies, filterable by type (fiat, metal, crypto). Rates refresh from daily on the free plan down to every 60 seconds on paid plans.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://currencyapi.com/docs/latest](https://currencyapi.com/docs/latest)
-- **Base URL:** `https://api.currencyapi.com/v3`
+- [Currencyapi Agentic Access](https://apis.io/agentic-access/currencyapi/currencyapi-agentic-access/)
 
-#### Tags
+#### Collections (7)
 
-- Foreign Exchange
-- Exchange Rates
-- Real-Time
-- FX
+Postman and Open Collection request collections.
 
-#### Properties
+- [CurrencyAPI](https://apis.io/collections/currencyapi/open-currencyapi/)
+- [Currency Convert API](https://apis.io/collections/currencyapi/open-currencyapi-convert-api/)
+- [Currency Convert Currencies API](https://apis.io/collections/currencyapi/open-currencyapi-currencies-api/)
+- [Currency Convert Historical API](https://apis.io/collections/currencyapi/open-currencyapi-historical-api/)
+- [Currency Convert Latest API](https://apis.io/collections/currencyapi/open-currencyapi-latest-api/)
+- [Currency Convert Range API](https://apis.io/collections/currencyapi/open-currencyapi-range-api/)
+- [Currency Convert Status API](https://apis.io/collections/currencyapi/open-currencyapi-status-api/)
 
-- [Documentation](https://currencyapi.com/docs/latest)
-- [OpenAPI](openapi/currencyapi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/currencyapi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/currencyapi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (2)
 
-### CurrencyAPI Historical Exchange Rates API
+Authentication, trust centre, and vulnerability disclosure.
 
-Retrieves end-of-day foreign exchange rates for a specific date, with historical FX data reaching back to 1999, for any base currency and optional currency or type filters.
+- [Currencyapi Authentication](https://apis.io/security/currencyapi/currencyapi-authentication/)
+- [Currencyapi Domain Security](https://apis.io/security/currencyapi/currencyapi-domain-security/)
 
-- **Human URL:** [https://currencyapi.com/docs/historical](https://currencyapi.com/docs/historical)
-- **Base URL:** `https://api.currencyapi.com/v3`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Foreign Exchange
-- Exchange Rates
-- Historical Data
-- FX
+- [Currencyapi Plans Pricing](https://apis.io/plans/currencyapi/currencyapi-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://currencyapi.com/docs/historical)
-- [OpenAPI](openapi/currencyapi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/currencyapi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/currencyapi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### CurrencyAPI Range Exchange Rates API
+- [Currencyapi Rate Limits](https://apis.io/rate-limits/currencyapi/currencyapi-rate-limits/)
 
-Returns time-series exchange rate data between a start and end datetime in one call, with selectable accuracy of day (up to 366 days), hour, quarter hour, or minute for charting and FX analytics. Available on the Medium plan and above.
+#### FinOps (1)
 
-- **Human URL:** [https://currencyapi.com/docs/range](https://currencyapi.com/docs/range)
-- **Base URL:** `https://api.currencyapi.com/v3`
+What the API costs to run, by operation.
 
-#### Tags
+- [Currencyapi Finops](https://apis.io/finops/currencyapi/currencyapi-finops/)
 
-- Foreign Exchange
-- Time Series
-- Exchange Rates
-- FX
+## Where to find this API
 
-#### Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [Documentation](https://currencyapi.com/docs/range)
-- [OpenAPI](openapi/currencyapi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/currencyapi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/currencyapi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### CurrencyAPI Convert API
-
-Converts any monetary value from a base currency into one or more target currencies using either today's exchange rates or the rates of a given historical date. Available on paid plans (Small and up).
-
-- **Human URL:** [https://currencyapi.com/docs/convert](https://currencyapi.com/docs/convert)
-- **Base URL:** `https://api.currencyapi.com/v3`
-
-#### Tags
-
-- Currency Conversion
-- Foreign Exchange
-- FX
-
-#### Properties
-
-- [Documentation](https://currencyapi.com/docs/convert)
-- [OpenAPI](openapi/currencyapi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/currencyapi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/currencyapi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### CurrencyAPI Currencies API
-
-Lists all supported currencies with metadata - symbol, name, native symbol, decimal digits, rounding, plural name, type (fiat, metal, crypto), and associated countries - filterable by code or type.
-
-- **Human URL:** [https://currencyapi.com/docs/currencies](https://currencyapi.com/docs/currencies)
-- **Base URL:** `https://api.currencyapi.com/v3`
-
-#### Tags
-
-- Currency
-- Reference Data
-- Metadata
-
-#### Properties
-
-- [Documentation](https://currencyapi.com/docs/currencies)
-- [OpenAPI](openapi/currencyapi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/currencyapi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/currencyapi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### CurrencyAPI Status API
-
-Programmatically checks whether the API is up and returns your monthly and grace quota usage. Requests to this endpoint do not count against your quota or rate limit.
-
-- **Human URL:** [https://currencyapi.com/docs/status](https://currencyapi.com/docs/status)
-- **Base URL:** `https://api.currencyapi.com/v3`
-
-#### Tags
-
-- Status
-- Quota
-- Account
-
-#### Properties
-
-- [Documentation](https://currencyapi.com/docs/status)
-- [OpenAPI](openapi/currencyapi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/currencyapi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/currencyapi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/everapihq)
-- [LinkedIn](https://www.linkedin.com/company/everapi)
 - [Website](https://currencyapi.com)
 - [Documentation](https://currencyapi.com/docs)
-- [API Reference](https://currencyapi.com/docs/latest)
-- [Authentication](https://currencyapi.com/docs/authentication)
+- [API reference](https://currencyapi.com/docs/latest)
 - [Pricing](https://currencyapi.com/pricing)
-- [Plans](plans/currencyapi-plans-pricing.yml)
-- [Rate Limits](rate-limits/currencyapi-rate-limits.yml)
-- [Fin Ops](finops/currencyapi-finops.yml)
+- [GitHub](https://github.com/everapihq)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 29.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 18.4 |
+
+**Agent readiness 26.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/currencyapi/](https://apis.io/providers/currencyapi/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for CurrencyAPI: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/currencyapi/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
